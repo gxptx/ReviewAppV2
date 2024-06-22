@@ -10,7 +10,7 @@ struct Review: Identifiable {
 }
 
 let sampleReviews = [
-    Review(id: UUID(), image: "bg", title: "My time at Bali", reviewText: "It left me speechless...", rating: 8, reviewCount: 592),
+    Review(id: UUID(), image: "bg1", title: "My time at Bali", reviewText: "It left me speechless...", rating: 8, reviewCount: 592),
     Review(id: UUID(), image: "bg2", title: "Exploring Paris", reviewText: "A wonderful experience!", rating: 9, reviewCount: 480),
     Review(id: UUID(), image: "bg3", title: "Skiing in Switzerland", reviewText: "Breathtaking views and slopes!", rating: 7, reviewCount: 340),
     Review(id: UUID(), image: "bg4", title: "Beach days in Maldives", reviewText: "Paradise on Earth!", rating: 5, reviewCount: 890),
@@ -69,8 +69,10 @@ struct ContentView: View {
     }
 
     private func moveCard(offset: Int) {
-        currentIndex = (currentIndex + offset + reviews.count) % reviews.count
-        cardOffset = .zero
+        withAnimation {
+            currentIndex = (currentIndex + offset + reviews.count) % reviews.count
+            cardOffset = .zero
+        }
     }
 }
 
@@ -80,40 +82,44 @@ struct ReviewCard: View {
     var index: Int
 
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             Image(review.image)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.6)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: UIScreen.main.bounds.width * 0.85, height: UIScreen.main.bounds.height * 0.65)
                 .cornerRadius(15)
+                .clipped()
                 .shadow(radius: 5)
 
-            VStack {
+            VStack(spacing: 10) {
                 Text(review.title)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .padding()
+                    .font(.largeTitle)
+                    .fontWeight(.black)
+                    .foregroundColor(Color.white)
+                    .multilineTextAlignment(.leading)
 
                 Text(review.reviewText)
-                    .font(.body)
-                    .padding()
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .foregroundColor(Color.white)
+                    .multilineTextAlignment(.leading)
 
                 HStack {
                     ForEach(1...5, id: \.self) { index in
-                        Image(systemName: index <= review.rating ? "star.fill" : "star")
+                        Image(systemName: Double(index) <= Double(review.rating) / 2.0 ? "star.fill" : (Double(index) - 0.5 <= Double(review.rating) / 2.0 ? "star.leadinghalf.fill" : "star"))
                             .foregroundColor(.orange)
                     }
                 }
-                .padding()
 
                 Text("Reviews: \(review.reviewCount)")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-            }
+                    .font(.footnote)
+                    .fontWeight(.medium)
+                    .foregroundColor(Color.white)            }
             .padding()
-            .background(Color.white)
-            .cornerRadius(15)
-            .shadow(radius: 5)
+            .background(Color.black.opacity(0.5)) // Semi-opaque background
+            .cornerRadius(15) // Rounded corners for the container
+            .frame(width: UIScreen.main.bounds.width * 0.75) // Adjusted frame width
+            .padding(.bottom, 10) // Add bottom padding
         }
         .offset(x: index == currentIndex ? 0 : UIScreen.main.bounds.width, y: 0)
         .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: index == currentIndex)
