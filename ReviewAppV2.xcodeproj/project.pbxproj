@@ -14,6 +14,9 @@
 		772762A12C252C9200BEEA7A /* ReviewAppV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772762A02C252C9200BEEA7A /* ReviewAppV2Tests.swift */; };
 		772762AB2C252C9200BEEA7A /* ReviewAppV2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772762AA2C252C9200BEEA7A /* ReviewAppV2UITests.swift */; };
 		772762AD2C252C9200BEEA7A /* ReviewAppV2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772762AC2C252C9200BEEA7A /* ReviewAppV2UITestsLaunchTests.swift */; };
+		772762BA2C26D36100BEEA7A /* place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772762B92C26D35C00BEEA7A /* place.swift */; };
+		772762BC2C26D3A500BEEA7A /* networkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772762BB2C26D39500BEEA7A /* networkManager.swift */; };
+		772762BE2C26D3F900BEEA7A /* reviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772762BD2C26D3F200BEEA7A /* reviewCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		772762A62C252C9200BEEA7A /* ReviewAppV2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReviewAppV2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		772762AA2C252C9200BEEA7A /* ReviewAppV2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAppV2UITests.swift; sourceTree = "<group>"; };
 		772762AC2C252C9200BEEA7A /* ReviewAppV2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAppV2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		772762B92C26D35C00BEEA7A /* place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = place.swift; sourceTree = "<group>"; };
+		772762BB2C26D39500BEEA7A /* networkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkManager.swift; sourceTree = "<group>"; };
+		772762BD2C26D3F200BEEA7A /* reviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reviewCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,9 @@
 		7727628E2C252C9000BEEA7A /* ReviewAppV2 */ = {
 			isa = PBXGroup;
 			children = (
+				772762BD2C26D3F200BEEA7A /* reviewCard.swift */,
+				772762BB2C26D39500BEEA7A /* networkManager.swift */,
+				772762B92C26D35C00BEEA7A /* place.swift */,
 				7727628F2C252C9000BEEA7A /* ReviewAppV2App.swift */,
 				772762912C252C9000BEEA7A /* ContentView.swift */,
 				772762932C252C9200BEEA7A /* Assets.xcassets */,
@@ -257,6 +266,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				772762BC2C26D3A500BEEA7A /* networkManager.swift in Sources */,
+				772762BA2C26D36100BEEA7A /* place.swift in Sources */,
+				772762BE2C26D3F900BEEA7A /* reviewCard.swift in Sources */,
 				772762922C252C9000BEEA7A /* ContentView.swift in Sources */,
 				772762902C252C9000BEEA7A /* ReviewAppV2App.swift in Sources */,
 			);
