@@ -1,6 +1,5 @@
 import SwiftUI
 
-// Data Model
 struct Review: Identifiable {
     var id: UUID
     var image: String
@@ -10,9 +9,8 @@ struct Review: Identifiable {
     var reviewCount: Int
 }
 
-// Sample Reviews Array
 let sampleReviews = [
-    Review(id: UUID(), image: "bg1", title: "My time at Bali", reviewText: "It left me speechless...", rating: 8, reviewCount: 592),
+    Review(id: UUID(), image: "bg", title: "My time at Bali", reviewText: "It left me speechless...", rating: 8, reviewCount: 592),
     Review(id: UUID(), image: "bg2", title: "Exploring Paris", reviewText: "A wonderful experience!", rating: 9, reviewCount: 480),
     Review(id: UUID(), image: "bg3", title: "Skiing in Switzerland", reviewText: "Breathtaking views and slopes!", rating: 7, reviewCount: 340),
     Review(id: UUID(), image: "bg4", title: "Beach days in Maldives", reviewText: "Paradise on Earth!", rating: 5, reviewCount: 890),
@@ -24,7 +22,6 @@ let sampleReviews = [
     Review(id: UUID(), image: "bg10", title: "Cruise in the Caribbean", reviewText: "Relaxing and luxurious experience.", rating: 10, reviewCount: 380),
 ]
 
-// ContentView
 struct ContentView: View {
     @State private var reviews = sampleReviews.shuffled()
     @State private var currentIndex = 0
@@ -43,7 +40,9 @@ struct ContentView: View {
                             .onEnded { value in
                                 let cardWidth = UIScreen.main.bounds.width * 0.8
                                 if abs(value.translation.width) > cardWidth * 0.5 {
-                                    self.moveCard(offset: value.translation.width > 0 ? 1 : -1)
+                                    withAnimation {
+                                        self.moveCard(offset: value.translation.width > 0 ? 1 : -1)
+                                    }
                                 } else {
                                     withAnimation {
                                         self.cardOffset = .zero
@@ -59,7 +58,10 @@ struct ContentView: View {
                     Image(uiImage: imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .blur(radius: 10)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                        .clipped()
+                        .blur(radius: 5, opaque: true)
+                        .overlay(Color.black.opacity(0.2))
                 }
             }
             .edgesIgnoringSafeArea(.all)
@@ -67,12 +69,11 @@ struct ContentView: View {
     }
 
     private func moveCard(offset: Int) {
-        withAnimation {
-            currentIndex = (currentIndex + offset + reviews.count) % reviews.count
-            cardOffset = .zero
-        }
+        currentIndex = (currentIndex + offset + reviews.count) % reviews.count
+        cardOffset = .zero
     }
 }
+
 struct ReviewCard: View {
     var review: Review
     var currentIndex: Int
@@ -115,11 +116,10 @@ struct ReviewCard: View {
             .shadow(radius: 5)
         }
         .offset(x: index == currentIndex ? 0 : UIScreen.main.bounds.width, y: 0)
-        .animation(.interpolatingSpring(stiffness: 100, damping: 10)) // Optional: Specify default animation here
+        .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: index == currentIndex)
     }
 }
 
-// Preview
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
